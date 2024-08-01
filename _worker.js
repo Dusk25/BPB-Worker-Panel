@@ -112,7 +112,7 @@ export default {
                                 'Access-Control-Allow-Methods': 'GET, POST',
                                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                                 'X-Content-Type-Options': 'nosniff',
-                                'X-Frame-Options': 'DENY',
+                                'X-Frame-Options': 'DENY', 
                                 'Referrer-Policy': 'strict-origin-when-cross-origin'
                             }
                         });
@@ -128,7 +128,7 @@ export default {
                         if (loginAuth) return Response.redirect(`${url.origin}/panel`, 302);
 
                         let secretKey = await env.bpb.get('secretKey');
-                        const pwd = await env.bpb.get('pwd');
+                        const pwd = await env.bpb.get('pwd'); 
                         if (!pwd) await env.bpb.put('pwd', 'admin');
 
                         if (!secretKey) {
@@ -191,7 +191,7 @@ export default {
                         await env.bpb.put('pwd', newPwd);
 
                         return new Response('Success', {
-                            status: 200,
+                            status: 200, 
                             headers: {
                                 'Set-Cookie': 'jwtToken=; Path=/; Secure; SameSite=None; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
                                 'Content-Type': 'text/plain',
@@ -199,7 +199,7 @@ export default {
                         });
 
                     default:
-                        // return new Response('Not found', { status: 404 });
+                        return new Response('Not found', { status: 404 }); 
                         url.hostname = 'www.speedtest.net';
                         url.protocol = 'https:';
                         request = new Request(url, request);
